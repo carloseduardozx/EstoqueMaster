@@ -1,0 +1,102 @@
+<!-- templates/estoque.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-arrow-left-right me-2"></i>Registrar Movimentação de Estoque</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('estoque.movimentar') }}" method="post">
+                        <div class="mb-3">
+                            <label for="produto_id" class="form-label">Produto*</label>
+                            <select class="form-select" id="produto_id" name="produto_id" required>
+                                <option value="" selected disabled>Selecione um produto...</option>
+                                {% for produto in produtos %}
+                                <option value="{{ produto.id }}">{{ produto.titulo }} - (Estoque: {{ produto.estoque }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Movimentação*</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tipo" id="tipoEntrada" value="Entrada" required>
+                                    <label class="form-check-label" for="tipoEntrada">Entrada</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tipo" id="tipoSaida" value="Saída" required>
+                                    <label class="form-check-label" for="tipoSaida">Saída</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quantidade" class="form-label">Quantidade*</label>
+                            <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="data_movimentacao" class="form-label">Data da Movimentação*</label>
+                            <input type="date" class="form-control" id="data_movimentacao" name="data_movimentacao" required>
+                        </div>
+                        
+                        <!-- Botão com ícone e largura total -->
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-plus-circle me-2"></i>Registrar Movimentação
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-clock-history me-2"></i>Histórico de Movimentações</h5>
+                </div>
+                <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Qtd.</th>
+                                <th>Responsável</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mov in movimentacoes %}
+                            <tr>
+                                <td>{{ mov.data_movimentacao.strftime('%d/%m/%Y %H:%M') }}</td>
+                                <td>{{ mov.produto.titulo }}</td>
+                                <!-- Badge com ícone dinâmico -->
+                                <td><span class="badge bg-{{ 'success' if mov.tipo == 'Entrada' else 'danger' }}">
+                                    <i class="bi bi-{{ 'arrow-down-circle' if mov.tipo == 'Entrada' else 'arrow-up-circle' }}"></i> {{ mov.tipo }}
+                                </span></td>
+                                <td>{{ mov.quantidade }}</td>
+                                <td>{{ mov.responsavel.nome }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhuma movimentação registrada ainda.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('data_movimentacao').valueAsDate = new Date();
+</script>
+
+{% endblock %}

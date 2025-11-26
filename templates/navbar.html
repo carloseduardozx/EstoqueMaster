@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('ctrl_home.dashboard') if current_user.is_authenticated else url_for('ctrl_home.index') }}">Sistema de Estoque</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ctrl_home.dashboard') }}">Painel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('produtos.index') }}">Cadastro de Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('estoque.index') }}">Gestão de Estoque</a>
+        </li>
+        {% endif %}
+      </ul>
+      
+      <div class="d-flex align-items-center">
+        {% if current_user.is_authenticated %}
+          <span class="navbar-text me-3">Olá, {{ current_user.nome }}!</span>
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">Sair</a>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success">Entrar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

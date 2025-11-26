@@ -1,0 +1,35 @@
+/* static/css/notifications.css */
+
+/* Container que vai ficar no canto da tela */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050; /* Para ficar por cima de tudo */
+}
+
+/* Estilo de cada notificação */
+.toast {
+    min-width: 300px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Animação para a notificação entrar */
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Cores para cada tipo de mensagem */
+.toast-success { background-color: #28a745; }
+.toast-danger { background-color: #dc3545; }
+.toast-warning { background-color: #ffc107; color: #212529; } /* Texto escuro no amarelo */
+.toast-info { background-color: #17a2b8; }

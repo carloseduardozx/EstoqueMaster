@@ -1,0 +1,49 @@
+<!-- templates/public_home.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+<!-- Seção Hero Moderna -->
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-3">Ferramentas Master</h1>
+        <p class="lead">A sua parceira em equipamentos de alta qualidade para construção e reparos.</p>
+        <hr class="my-4 border-white opacity-50">
+        <p>Gestão de estoque de ponta para garantir que você sempre tenha a ferramenta certa na hora certa.</p>
+        <a class="btn btn-success btn-lg" href="{{ url_for('auth.login') }}" role="button">
+            <i class="bi bi-box-arrow-in-right me-2"></i> Acessar Sistema
+        </a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card h-100 feature-card">
+                <div class="card-body">
+                    <div class="card-title text-primary">🛠️</div>
+                    <h5 class="card-title">Qualidade</h5>
+                    <p class="card-text">Trabalhamos com as melhores marcas do mercado para garantir durabilidade e eficiência.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 feature-card">
+                <div class="card-body">
+                    <div class="card-title text-success">📦</div>
+                    <h5 class="card-title">Controle Total</h5>
+                    <p class="card-text">Sistema inteligente de controle de estoque para evitar faltas e excessos.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 feature-card">
+                <div class="card-body">
+                    <div class="card-title text-warning">🚀</div>
+                    <h5 class="card-title">Agilidade</h5>
+                    <p class="card-text">Interface rápida e intuitiva para que sua equipe foque no que importa: o trabalho.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

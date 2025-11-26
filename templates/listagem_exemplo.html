@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+    table td {
+        text-align: center;
+    }
+</style>
+<table>
+    <tr>
+        <th>Campo de Texto</th> 
+        <th>Campo Texto Limitado</th>
+        <th>Controles</th>
+    </tr>
+
+    {% for l in listagem %}
+    <tr>
+        <td>{{l.campo_texto}}</td> 
+        <td>{{l.campo_texto_limitado}}</td>
+        <td>
+            <a href="">Excluir</a> | 
+            <a href="">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}
