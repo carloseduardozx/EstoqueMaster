@@ -1,3 +1,4 @@
+<!-- templates/navbar.html -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url_for('ctrl_home.dashboard') if current_user.is_authenticated else url_for('ctrl_home.index') }}">Sistema de Estoque</a>
@@ -20,6 +21,10 @@
       </ul>
       
       <div class="d-flex align-items-center">
+        <button id="theme-toggle" class="btn btn-outline-secondary me-3" title="Alternar tema">
+            <i class="bi bi-moon-stars-fill"></i>
+        </button>
+
         {% if current_user.is_authenticated %}
           <span class="navbar-text me-3">Olá, {{ current_user.nome }}!</span>
           <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">Sair</a>

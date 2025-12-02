@@ -5,40 +5,71 @@
 
 /* --- Variáveis de Cor (Paleta) --- */
 :root {
-    --primary-color: #0d6efd; /* Azul Bootstrap padrão, mas podemos mudar! */
+    --primary-color: #9d0dfd;
     --secondary-color: #6c757d;
-    --accent-color: #198754; /* Verde para sucesso */
+    --accent-color: #198754;
     --background-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --text-color: #343a40;
+    --text-muted-color: #6c757d;
+    --border-color: #dee2e6;
     --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     --border-radius: 0.75rem;
 }
 
-/* --- Estilos Globais --- */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--background-color);
-    color: #343a40;
+/* --- Variáveis do Tema Escuro --- */
+.dark-mode {
+    --primary-color: #863acc;
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-color: #e9ecef;
+    --text-muted-color: #adb5bd;
+    --border-color: #495057;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Navbar --- */
+/* --- Transição Suave para a Troca de Tema --- */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Layout Flexbox para o Rodapé Grudado --- */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* --- CORREÇÃO AGRESSIVA DA NAVBAR --- */
+/* Força o fundo e a cor da navbar em ambos os temas */
 .navbar {
+    background-color: var(--surface-color) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     padding-top: 1rem;
     padding-bottom: 1rem;
+    flex-shrink: 0;
 }
 
-.navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--primary-color) !important;
+/* Força a cor de todos os textos e links dentro da navbar */
+.navbar .navbar-brand,
+.navbar .navbar-text,
+.navbar .nav-link {
+    color: var(--text-color) !important;
 }
 
-.navbar-nav .nav-link {
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
+/* Força a cor do link quando o mouse está em cima */
+.navbar .nav-link:hover {
     color: var(--primary-color) !important;
 }
 
@@ -48,6 +79,8 @@ body {
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
 }
 
 .card:hover {
@@ -56,10 +89,23 @@ body {
 }
 
 .card-header {
-    background-color: #fff;
-    border-bottom: 1px solid #e9ecef;
+    background-color: var(--surface-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     font-weight: 600;
     border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+    color: var(--text-color) !important;
+}
+
+/* --- CORREÇÃO DA PÁGINA INICIAL (Feature Cards) --- */
+.feature-card .card-body,
+.feature-card .card-text {
+    color: var(--text-color) !important;
+}
+
+/* --- CORREÇÃO DA PÁGINA DE PAINEL (Jumbotron) --- */
+.jumbotron, .bg-light { /* Pega tanto o .jumbotron quanto o .bg-light do Bootstrap */
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
 }
 
 /* --- Botões --- */
@@ -75,8 +121,8 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    background-color: #7b0bd7;
+    border-color: #aa0aca;
     transform: translateY(-2px);
 }
 
@@ -87,34 +133,46 @@ body {
 /* --- Formulários --- */
 .form-control, .form-select {
     border-radius: 0.5rem;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: var(--primary-color);
+    border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
 }
 
-/* --- Tabelas --- */
+/* --- CORREÇÃO DAS TABELAS --- */
 .table {
     border-radius: var(--border-radius);
     overflow: hidden;
+    color: var(--text-color) !important;
+    background-color: var(--surface-color) !important; /* Fundo da tabela */
 }
 
 .table thead th {
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border-color) !important;
     font-weight: 600;
-    color: #495057;
+    color: var(--text-color) !important;
+    background-color: var(--surface-color) !important; /* Fundo do cabeçalho */
+}
+
+.table tbody td {
+    color: var(--text-color) !important;
+    background-color: var(--surface-color) !important; /* Fundo das células */
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.05) !important; /* Hover sutil no modo escuro */
 }
 
 /* --- Seção Hero (Página Pública) --- */
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color), #004085);
+    background: linear-gradient(135deg, var(--primary-color), #3e1581);
     color: white;
     padding: 5rem 0;
     text-align: center;
@@ -148,7 +206,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: var(--background-color);
+    background-color: var(--background-color) !important;
 }
 
 .login-card {
@@ -157,6 +215,8 @@ body {
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
 }
 
 .login-card h1 {
@@ -166,11 +226,75 @@ body {
     color: var(--primary-color);
 }
 
-/* --- Footer (Adicionando um rodapé) --- */
+/* --- Footer --- */
 .footer {
-    background-color: #343a40;
+    background-color: #212529;
     color: #fff;
     text-align: center;
     padding: 2rem 0;
-    margin-top: 3rem;
+    flex-shrink: 0;
+}
+
+/* Quando o body tem a classe 'dark-mode', aplica estes estilos à navbar */
+body.dark-mode .navbar {
+    background-color: var(--surface-color) !important;
+}
+
+/* Força a cor de todos os textos e links dentro da navbar no modo escuro */
+body.dark-mode .navbar .navbar-brand,
+body.dark-mode .navbar .navbar-text,
+body.dark-mode .navbar .nav-link {
+    color: var(--text-color) !important;
+}
+
+/* Força a cor do link quando o mouse está em cima no modo escuro */
+body.dark-mode .navbar .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Garante que o botão de toggle (menu hambúrguer) também tenha a cor certa no modo escuro */
+body.dark-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23e9ecef' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* 1. Força a box de bem-vindo a ter o tema escuro */
+body.dark-mode .bg-light {
+    background-color: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+main h1, main h2, main h3, main h4, main h5, main h6,
+main p, main span, main div {
+    font-style: normal !important;
+    text-transform: none !important;
+    transform: none !important;
+    text-decoration: none !important;
+}
+
+/* Botão de Entrar (na tela de login) */
+.login-card .btn-primary {
+    background-color: #522a9d; /* Um verde moderno e forte */
+    border-color: #522a9d;
+    color: #ffffff; /* Garante que o texto seja branco */
+}
+
+.login-card .btn-primary:hover {
+    background-color: #bf89eb;
+    border-color: #bf89eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(42, 157, 143, 0.3);
+}
+
+/* Botões de Cadastrar e Registrar (nos formulários internos) */
+.card-body .btn-primary {
+    background-color: #522a9d;
+    border-color: #442086;
+    color: #ffffff;
+}
+
+.card-body .btn-primary:hover {
+    background-color: #6734c7;
+    border-color: #561dc2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(42, 157, 143, 0.3);
 }
